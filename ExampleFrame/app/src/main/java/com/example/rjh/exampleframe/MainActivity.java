@@ -1,5 +1,6 @@
 package com.example.rjh.exampleframe;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -20,8 +21,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.example.rjh.exampleframe.activity.BaseActivity;
+import com.example.rjh.exampleframe.activity.FullscreenActivity;
 import com.example.rjh.exampleframe.fragment.Tab1Fragment;
 import com.example.rjh.exampleframe.fragment.Tab2Fragment;
 import com.example.rjh.exampleframe.fragment.Tab3Fragment;
@@ -29,7 +33,7 @@ import com.example.rjh.exampleframe.fragment.Tab4Fragment;
 import com.example.rjh.exampleframe.ui.InterfaceTest;
 import com.example.rjh.exampleframe.view.PagerSlidingTabStrip;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private PagerSlidingTabStrip tabs;//顶部切换tab
     private ViewPager pager;
@@ -49,15 +53,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         toolbar.setTitle("主界面");
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -76,6 +71,7 @@ public class MainActivity extends AppCompatActivity
         tabs.setViewPager(pager);
         setTabsValue();
     }
+
 
     /**
      * 对PagerSlidingTabStrip的各项属性进行赋值。
@@ -153,7 +149,7 @@ public class MainActivity extends AppCompatActivity
                     }
                 };
         } else if (id == R.id.nav_slideshow) {
-
+            startActivity(new Intent(this, FullscreenActivity.class));
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
