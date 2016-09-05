@@ -3,25 +3,23 @@ package com.example.rjh.exampleframe;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.WindowManager;
+import android.view.ViewTreeObserver;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rjh.exampleframe.activity.BaseActivity;
@@ -32,9 +30,18 @@ import com.example.rjh.exampleframe.fragment.Tab3Fragment;
 import com.example.rjh.exampleframe.fragment.Tab4Fragment;
 import com.example.rjh.exampleframe.ui.InterfaceTest;
 import com.example.rjh.exampleframe.view.PagerSlidingTabStrip;
+import com.nineoldandroids.view.ViewHelper;
+import com.nineoldandroids.view.ViewPropertyAnimator;
 
-public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+/**
+ * @author 任建红
+ * @Description: 仅仅是一个自己锻炼的框架
+ * @FileName:MainActivity.java
+ * @Package
+ * @Date 2016/9/5 17:03
+ */
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+
     private PagerSlidingTabStrip tabs;//顶部切换tab
     private ViewPager pager;
     private DisplayMetrics dm;  // 获取当前屏幕的密度
@@ -45,19 +52,36 @@ public class MainActivity extends BaseActivity
     private Tab3Fragment tab3Fragment;//切换的fragment3
     private Tab4Fragment tab4Fragment;//切换的fragment4
 
+    //用户中心
+    private RelativeLayout mUserCenterLayout,mUserContentLayout,mUserTitleLayout;
+    private TextView mUserTv;
+    private int userTvHeight,mUserContentHeight,mUserCenterHeight;
+    private Boolean mUserInfoShow = true;//用户中心是否显示
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initView();
+    }
+
+    /**
+    * @method  View 初始化
+    */
+    private void initView(){
+        //初始化工具栏
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("主界面");
 
+        //用户中心初始化
+        initUserCenter();
+
+        //初始化侧滑栏
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
-
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -74,8 +98,40 @@ public class MainActivity extends BaseActivity
 
 
     /**
-     * 对PagerSlidingTabStrip的各项属性进行赋值。
-     */
+    * @method 用户中心初始化
+    */
+    private void initUserCenter() {
+        mUserCenterLayout = (RelativeLayout) findViewById(R.id.user_center_layout);
+        mUserContentLayout = (RelativeLayout) findViewById(R.id.user_content);
+        mUserTitleLayout = (RelativeLayout) findViewById(R.id.user_title_layout);
+        mUserTv = (TextView) findViewById(R.id.user);
+
+        //用户中心点击事件
+        mUserTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mUserInfoShow){
+                    showAnimation();//用户中心显示
+                }else {
+                    hidAnimation();//用户中心隐藏
+                }
+            }
+        });
+
+        mUserCenterLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+               mUserCenterHeight = mUserCenterLayout.getHeight();
+               userTvHeight = mUserTitleLayout.getHeight();
+               mUserContentHeight = mUserContentLayout.getHeight();
+               ViewHelper.setTranslationY(mUserCenterLayout,mUserContentHeight);
+            }
+        });
+    }
+
+    /**
+    * @method 对PagerSlidingTabStrip的各项属性进行赋值
+    */
     private void setTabsValue() {
         // 设置Tab是自动填充满屏幕的
         tabs.setShouldExpand(true);
@@ -108,6 +164,9 @@ public class MainActivity extends BaseActivity
         }
     }
 
+    /**
+    * @method 创建菜单
+    */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -130,9 +189,9 @@ public class MainActivity extends BaseActivity
         return super.onOptionsItemSelected(item);
     }
 
-     /**
-       * @method 侧滑菜单点击事件
-       */
+    /**
+    * @method 侧滑菜单点击事件
+    */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -163,10 +222,30 @@ public class MainActivity extends BaseActivity
         return true;
     }
 
+    /**
+    * @method 用户中心隐藏动画
+    */
+    private void hidAnimation() {
+        mUserInfoShow = true;
+        ViewPropertyAnimator.animate(mUserCenterLayout).translationYBy(mUserContentHeight)
+                .setDuration(300)
+                .start();
+    }
 
     /**
-     * fragmentPager 适配器
-     * */
+    * @method 用户中心显示动画
+    */
+    private void showAnimation() {
+        mUserInfoShow = false;
+        ViewPropertyAnimator.animate(mUserCenterLayout).translationYBy(-mUserContentHeight)
+                .setDuration(300)
+                .start();
+    }
+
+
+    /**
+    * @method fragmentPager 适配器
+    */
     public class TabListAdapter extends FragmentPagerAdapter {
 
         public TabListAdapter(FragmentManager fm) {
