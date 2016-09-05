@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -74,9 +75,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         setSupportActionBar(toolbar);
         toolbar.setTitle("主界面");
 
-        //用户中心初始化
-        initUserCenter();
-
         //初始化侧滑栏
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -85,6 +83,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //用户中心初始化
+        initUserCenter();
 
         // tab 切换页面
         dm = getResources().getDisplayMetrics();
@@ -106,6 +107,18 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mUserTitleLayout = (RelativeLayout) findViewById(R.id.user_title_layout);
         mUserTv = (TextView) findViewById(R.id.user);
 
+        //计算布局高度
+        mUserCenterLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+               mUserCenterHeight = mUserCenterLayout.getHeight();
+               userTvHeight = mUserTitleLayout.getHeight();
+               mUserContentHeight = mUserContentLayout.getHeight();
+               Log.d("TAG","控件高度："+" userTvHeight"+userTvHeight+" mUserContentHeight"+mUserContentHeight+" mUserCenterHeight"+mUserCenterHeight);
+               ViewHelper.setTranslationY(mUserCenterLayout,mUserContentHeight);
+            }
+        });
+
         //用户中心点击事件
         mUserTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,16 +128,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 }else {
                     hidAnimation();//用户中心隐藏
                 }
-            }
-        });
-
-        mUserCenterLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-               mUserCenterHeight = mUserCenterLayout.getHeight();
-               userTvHeight = mUserTitleLayout.getHeight();
-               mUserContentHeight = mUserContentLayout.getHeight();
-               ViewHelper.setTranslationY(mUserCenterLayout,mUserContentHeight);
             }
         });
     }

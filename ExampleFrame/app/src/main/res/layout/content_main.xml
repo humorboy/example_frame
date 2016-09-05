@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tabs" />
 
+    <!-- 用户中心布局-->
     <RelativeLayout
         android:id="@+id/user_center_layout"
         android:layout_alignParentBottom="true"
