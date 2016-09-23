@@ -3,6 +3,7 @@ package com.example.rjh.exampleframe;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -21,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +34,7 @@ import com.example.rjh.exampleframe.fragment.Tab2Fragment;
 import com.example.rjh.exampleframe.fragment.Tab3Fragment;
 import com.example.rjh.exampleframe.fragment.Tab4Fragment;
 import com.example.rjh.exampleframe.ui.InterfaceTest;
+import com.example.rjh.exampleframe.utils.Tasktimer;
 import com.example.rjh.exampleframe.view.PagerSlidingTabStrip;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
@@ -60,6 +63,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private TextView mUserTv;
     private int userTvHeight,mUserContentHeight,mUserCenterHeight;
     private Boolean mUserInfoShow = true;//用户中心是否显示
+    private Tasktimer signInTime;
+
+    private Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +82,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("主界面");
+
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//        EditText tv = new EditText(this);
+//        tv.setText("好好学习天天向上");
+//        tv.setBackgroundColor(Color.RED);
+//        actionBar.setCustomView(tv);
 
         //初始化侧滑栏
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -97,8 +110,25 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         pager.setAdapter(pageAdapter);
         tabs.setViewPager(pager);
         setTabsValue();
+
+        mHandler =  new Handler(getMainLooper());
+
+        //初始化计时器控件
+        signInTime = (Tasktimer) findViewById(R.id.signin_time_textview);
+        signInTime.initTime(0, 3600 * 24);
+        signInTime.start();
+        signInTime.setOnTimeCompleteListener(new Tasktimer.OnTimeCompleteListener() {
+            @Override
+            public void onTimeComplete() {
+                signInTime.setTextColor(Color.parseColor("#FF0000"));
+            }
+        });
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 
     /**
     * @method 用户中心初始化
@@ -108,7 +138,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mUserContentLayout = (RelativeLayout) findViewById(R.id.user_content);
         mUserTitleLayout = (RelativeLayout) findViewById(R.id.user_title_layout);
         mUserTv = (TextView) findViewById(R.id.user);
-
         //计算布局高度
         mUserCenterLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override

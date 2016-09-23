@@ -28,6 +28,15 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="#05000000">
+
+            <com.example.rjh.exampleframe.utils.Tasktimer
+                android:id="@+id/signin_time_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:layout_marginTop="10sp"
+                android:textSize="30sp" />
+
             <TextView
                 android:id="@+id/user"
                 android:layout_centerInParent="true"
@@ -47,6 +56,7 @@
                 android:textSize="18dp"
                 android:layout_centerInParent="true"
                 android:text="用户中心"/>
+
         </RelativeLayout>
     </RelativeLayout>
 
