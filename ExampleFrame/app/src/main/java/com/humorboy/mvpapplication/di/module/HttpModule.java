@@ -2,6 +2,7 @@ package com.humorboy.mvpapplication.di.module;
 
 import com.humorboy.mvpapplication.BuildConfig;
 import com.humorboy.mvpapplication.app.Constants;
+import com.humorboy.mvpapplication.di.qualifier.ZhihuUrl;
 import com.humorboy.mvpapplication.http.api.Apis;
 import com.humorboy.mvpapplication.util.SystemUtil;
 
@@ -24,13 +25,19 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Created by codeest on 2017/2/26.
+ */
+
 @Module
 public class HttpModule {
+
     @Singleton
     @Provides
     Retrofit.Builder provideRetrofitBuilder() {
         return new Retrofit.Builder();
     }
+
 
     @Singleton
     @Provides
@@ -40,7 +47,8 @@ public class HttpModule {
 
     @Singleton
     @Provides
-    Retrofit provideRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+    @ZhihuUrl
+    Retrofit provideZhihuRetrofit(Retrofit.Builder builder, OkHttpClient client) {
         return createRetrofit(builder, client, Apis.HOST);
     }
 
@@ -105,6 +113,12 @@ public class HttpModule {
         //错误重连
         builder.retryOnConnectionFailure(true);
         return builder.build();
+    }
+
+    @Singleton
+    @Provides
+    Apis provideZhihuService(@ZhihuUrl Retrofit retrofit) {
+        return retrofit.create(Apis.class);
     }
 
     private Retrofit createRetrofit(Retrofit.Builder builder, OkHttpClient client, String url) {

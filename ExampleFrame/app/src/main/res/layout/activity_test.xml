@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".test.TestActivity">
 
+    <FrameLayout
+        android:id="@+id/fl_main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <TextView
         android:id="@+id/textview"
         android:layout_centerHorizontal="true"

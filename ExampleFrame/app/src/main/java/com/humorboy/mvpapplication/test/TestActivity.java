@@ -2,6 +2,7 @@ package com.humorboy.mvpapplication.test;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -9,13 +10,12 @@ import android.widget.TextView;
 
 import com.humorboy.mvpapplication.R;
 import com.humorboy.mvpapplication.model.DataManager;
+import com.humorboy.mvpapplication.test.fragment.DailyFragment;
 import com.humorboy.mvpapplication.test.model.DailyListBean;
 import com.humorboy.mvpapplication.util.RxUtil;
 import com.humorboy.mvpapplication.util.ToastUtil;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +23,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 
-public class TestActivity extends Activity {
+public class TestActivity extends AppCompatActivity {
     @BindView(R.id.textview)
     TextView textview;
 
@@ -33,11 +33,20 @@ public class TestActivity extends Activity {
     private DataManager mDataManager;
     protected CompositeDisposable mCompositeDisposable;
 
+    DailyFragment dailyFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
         ButterKnife.bind(this);
+
+        dailyFragment = new DailyFragment();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.fl_main_content,dailyFragment)
+                .commit();
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
