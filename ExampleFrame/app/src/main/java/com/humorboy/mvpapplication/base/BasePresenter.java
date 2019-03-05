@@ -16,10 +16,9 @@
 
 package com.humorboy.mvpapplication.base;
 
-public interface BasePresenter {
+public interface BasePresenter<T extends BaseView>{
 
-    void subscribe();
+    void attachView(T view);
 
-    void unsubscribe();
-
+    void detachView();
 }
