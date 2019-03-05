@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.humorboy.mvpapplication.di.module.ActivityModule;
 import com.humorboy.mvpapplication.di.scope.ActivityScope;
 import com.humorboy.mvpapplication.test.TestActivity;
+import com.humorboy.mvpapplication.test.WelcomeActivity;
 
 import dagger.Component;
 
@@ -18,5 +19,5 @@ public interface ActivityComponent {
 
     Activity getActivity();
     void inject(TestActivity testActivity);
-
+    void inject(WelcomeActivity welcomeActivity);
 }
