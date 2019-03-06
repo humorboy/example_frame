@@ -20,4 +20,6 @@
     <dimen name="vtex_image_size">36dp</dimen>
     <dimen name="vtex_author_image_size">20dp</dimen>
     <dimen name="vtex_node_image_size">60dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
 </resources>

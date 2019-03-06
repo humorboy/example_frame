@@ -1,4 +1,4 @@
-package com.humorboy.mvpapplication.test.model;
+package com.humorboy.mvpapplication.mvp.main.model;
 
 import java.util.List;
 

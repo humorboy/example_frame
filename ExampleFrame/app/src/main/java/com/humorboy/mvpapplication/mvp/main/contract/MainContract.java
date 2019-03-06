@@ -1,16 +1,16 @@
-package com.humorboy.mvpapplication.test.contract;
+package com.humorboy.mvpapplication.mvp.main.contract;
 
 
 import com.humorboy.mvpapplication.base.BasePresenter;
 import com.humorboy.mvpapplication.base.BaseView;
-import com.humorboy.mvpapplication.test.model.DailyBeforeListBean;
-import com.humorboy.mvpapplication.test.model.DailyListBean;
+import com.humorboy.mvpapplication.mvp.main.model.DailyBeforeListBean;
+import com.humorboy.mvpapplication.mvp.main.model.DailyListBean;
 
 /**
  * Created by codeest on 16/8/11.
  */
 
-public interface DailyContract {
+public interface MainContract {
 
     interface View extends BaseView {
 

@@ -1,4 +1,4 @@
-package com.humorboy.mvpapplication.test.adapter;
+package com.humorboy.mvpapplication.mvp.main.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.humorboy.mvpapplication.R;
 import com.humorboy.mvpapplication.app.Constants;
 import com.humorboy.mvpapplication.base.ImageLoader;
-import com.humorboy.mvpapplication.test.model.DailyListBean;
+import com.humorboy.mvpapplication.mvp.main.model.DailyListBean;
 
 import java.util.ArrayList;
 import java.util.List;

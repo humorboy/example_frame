@@ -9,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.humorboy.mvpapplication.di.component.AppComponent;
 import com.humorboy.mvpapplication.di.component.DaggerAppComponent;
 import com.humorboy.mvpapplication.di.module.AppModule;
@@ -22,6 +23,8 @@ public class App extends Application {
     private static App instance;
     public static AppComponent appComponent;
     private Set<Activity> allActivities;
+    //Arouter 开关
+    private boolean isDebugArouter = true;
 
     public static int SCREEN_WIDTH = -1;
     public static int SCREEN_HEIGHT = -1;
@@ -43,11 +46,22 @@ public class App extends Application {
         instance = this;
         //初始化屏幕宽高
         getScreenSize();
+        if(isDebugArouter){
+            ARouter.openLog();
+            ARouter.openDebug();
+        }
+        ARouter.init(this);
     }
 
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        ARouter.getInstance().destroy();
     }
 
     public void addActivity(Activity act) {

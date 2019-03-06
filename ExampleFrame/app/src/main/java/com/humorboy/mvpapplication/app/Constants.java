@@ -124,4 +124,9 @@ public class Constants {
     public static final String IT_ZHIHU_COMMENT_SHORT_NUM = "zhihu_comment_short_num";
 
     public static final String IT_ZHIHU_COMMENT_LONG_NUM = "zhihu_comment_long_num";
+
+    //ARouter 路径标识
+    public static final boolean UseInterceptor = true;
+    public static final String ACTIVITY_WELCOME_URL = "/mvp/welcome/WelcomeActivity";
+    public static final String ACTIVITY_MAIN_URL = "/mvp/main/MainActivity";
 }

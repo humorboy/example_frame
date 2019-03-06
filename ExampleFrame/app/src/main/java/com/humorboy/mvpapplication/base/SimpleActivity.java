@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.humorboy.mvpapplication.app.App;
 
 import butterknife.ButterKnife;
@@ -27,6 +28,7 @@ public abstract class SimpleActivity extends SupportActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayout());
         mUnBinder = ButterKnife.bind(this);
+        ARouter.getInstance().inject(this); ;
         mContext = this;
         onViewCreated();
         App.getInstance().addActivity(this);
@@ -55,6 +57,7 @@ public abstract class SimpleActivity extends SupportActivity {
         super.onDestroy();
         App.getInstance().removeActivity(this);
         mUnBinder.unbind();
+        ARouter.getInstance().destroy();
     }
 
     protected abstract int getLayout();

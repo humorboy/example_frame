@@ -1,13 +1,13 @@
-package com.humorboy.mvpapplication.test.present;
+package com.humorboy.mvpapplication.mvp.main.present;
 
 import android.util.Log;
 
 import com.humorboy.mvpapplication.base.RxBus;
 import com.humorboy.mvpapplication.base.RxPresenter;
 import com.humorboy.mvpapplication.model.DataManager;
-import com.humorboy.mvpapplication.test.contract.DailyContract;
-import com.humorboy.mvpapplication.test.model.DailyBeforeListBean;
-import com.humorboy.mvpapplication.test.model.DailyListBean;
+import com.humorboy.mvpapplication.mvp.main.contract.DailyContract;
+import com.humorboy.mvpapplication.mvp.main.model.DailyBeforeListBean;
+import com.humorboy.mvpapplication.mvp.main.model.DailyListBean;
 import com.humorboy.mvpapplication.util.DateUtil;
 import com.humorboy.mvpapplication.util.RxUtil;
 import com.humorboy.mvpapplication.widget.CommonSubscriber;

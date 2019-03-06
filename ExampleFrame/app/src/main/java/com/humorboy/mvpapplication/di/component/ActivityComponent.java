@@ -4,8 +4,9 @@ import android.app.Activity;
 
 import com.humorboy.mvpapplication.di.module.ActivityModule;
 import com.humorboy.mvpapplication.di.scope.ActivityScope;
-import com.humorboy.mvpapplication.test.TestActivity;
-import com.humorboy.mvpapplication.test.WelcomeActivity;
+import com.humorboy.mvpapplication.mvp.main.MainActivity;
+import com.humorboy.mvpapplication.mvp.news.TestActivity;
+import com.humorboy.mvpapplication.mvp.welcome.WelcomeActivity;
 
 import dagger.Component;
 
@@ -16,8 +17,8 @@ import dagger.Component;
 @ActivityScope
 @Component(dependencies = AppComponent.class, modules = ActivityModule.class)
 public interface ActivityComponent {
-
     Activity getActivity();
-    void inject(TestActivity testActivity);
     void inject(WelcomeActivity welcomeActivity);
+    void inject(MainActivity mainActivity);
+    void inject(TestActivity testActivity);
 }

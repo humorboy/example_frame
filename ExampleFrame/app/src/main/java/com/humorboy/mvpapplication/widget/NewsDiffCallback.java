@@ -2,7 +2,7 @@ package com.humorboy.mvpapplication.widget;
 
 import android.support.v7.util.DiffUtil;
 
-import com.humorboy.mvpapplication.test.model.DailyListBean;
+import com.humorboy.mvpapplication.mvp.main.model.DailyListBean;
 
 import java.util.List;
 

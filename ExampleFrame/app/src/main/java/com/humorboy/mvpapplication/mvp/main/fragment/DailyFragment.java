@@ -1,7 +1,5 @@
-package com.humorboy.mvpapplication.test.fragment;
+package com.humorboy.mvpapplication.mvp.main.fragment;
 
-import android.app.ActivityOptions;
-import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,14 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.humorboy.mvpapplication.R;
-import com.humorboy.mvpapplication.app.Constants;
 import com.humorboy.mvpapplication.base.RootFragment;
 import com.humorboy.mvpapplication.base.RxBus;
-import com.humorboy.mvpapplication.test.adapter.DailyAdapter;
-import com.humorboy.mvpapplication.test.contract.DailyContract;
-import com.humorboy.mvpapplication.test.model.DailyBeforeListBean;
-import com.humorboy.mvpapplication.test.model.DailyListBean;
-import com.humorboy.mvpapplication.test.present.DailyPresenter;
+import com.humorboy.mvpapplication.mvp.main.adapter.DailyAdapter;
+import com.humorboy.mvpapplication.mvp.main.contract.DailyContract;
+import com.humorboy.mvpapplication.mvp.main.model.DailyBeforeListBean;
+import com.humorboy.mvpapplication.mvp.main.model.DailyListBean;
+import com.humorboy.mvpapplication.mvp.main.present.DailyPresenter;
 import com.humorboy.mvpapplication.util.DateUtil;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 

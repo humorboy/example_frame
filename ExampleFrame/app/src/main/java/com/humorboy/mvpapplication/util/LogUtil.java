@@ -4,12 +4,12 @@ import com.humorboy.mvpapplication.BuildConfig;
 import com.orhanobut.logger.Logger;
 
 /**
- * Created by codeest on 2016/8/3.
+ * Created by codeest on 2019/3/3.
  */
 public class LogUtil {
 
     public static boolean isDebug = BuildConfig.DEBUG;
-    private static final String TAG = "com.codeest.geeknews";
+    private static final String TAG = "ExampleMvpFrame";
 
     public static void e(String tag, Object o) {
         if(isDebug) {

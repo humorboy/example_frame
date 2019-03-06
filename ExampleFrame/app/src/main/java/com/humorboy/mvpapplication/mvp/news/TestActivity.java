@@ -1,6 +1,5 @@
-package com.humorboy.mvpapplication.test;
+package com.humorboy.mvpapplication.mvp.news;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,8 +9,8 @@ import android.widget.TextView;
 
 import com.humorboy.mvpapplication.R;
 import com.humorboy.mvpapplication.model.DataManager;
-import com.humorboy.mvpapplication.test.fragment.DailyFragment;
-import com.humorboy.mvpapplication.test.model.DailyListBean;
+import com.humorboy.mvpapplication.mvp.main.fragment.DailyFragment;
+import com.humorboy.mvpapplication.mvp.main.model.DailyListBean;
 import com.humorboy.mvpapplication.util.RxUtil;
 import com.humorboy.mvpapplication.util.ToastUtil;
 

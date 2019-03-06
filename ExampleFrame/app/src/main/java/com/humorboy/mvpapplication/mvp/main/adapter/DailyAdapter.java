@@ -1,4 +1,4 @@
-package com.humorboy.mvpapplication.test.adapter;
+package com.humorboy.mvpapplication.mvp.main.adapter;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
@@ -14,8 +14,8 @@ import android.widget.TextView;
 
 import com.humorboy.mvpapplication.R;
 import com.humorboy.mvpapplication.base.ImageLoader;
-import com.humorboy.mvpapplication.test.model.DailyBeforeListBean;
-import com.humorboy.mvpapplication.test.model.DailyListBean;
+import com.humorboy.mvpapplication.mvp.main.model.DailyBeforeListBean;
+import com.humorboy.mvpapplication.mvp.main.model.DailyListBean;
 import com.humorboy.mvpapplication.widget.NewsDiffCallback;
 import com.humorboy.mvpapplication.widget.SquareImageView;
 
@@ -46,7 +46,7 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private boolean isBefore = false;
     private String currentTitle = "最新";
 
-    public enum ITEM_TYPE {
+    public enum ITEM_TYPE{
         ITEM_TOP,       //滚动栏
         ITEM_DATE,      //日期
         ITEM_CONTENT    //内容
@@ -170,7 +170,6 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         mTopList = info.getTop_stories();
         isBefore = false;
         diffResult.dispatchUpdatesTo(this);
-//        notifyDataSetChanged();
     }
 
     public void addDailyBeforeDate(DailyBeforeListBean info) {
@@ -179,7 +178,6 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         mList = info.getStories();
         isBefore = true;
         diffResult.dispatchUpdatesTo(this);
-//        notifyDataSetChanged();
     }
 
     public boolean getIsBefore() {

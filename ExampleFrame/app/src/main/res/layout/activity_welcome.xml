@@ -5,7 +5,7 @@
 
     <ImageView
         android:id="@+id/iv_welcome_bg"
-        android:background="@mipmap/default_icon"
+        android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -15,7 +15,8 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
         android:layout_margin="10dp"
-        android:textSize="14sp"
+        android:textSize="16sp"
+        android:textStyle="bold"
         android:layout_gravity="bottom|end"/>
 
 </FrameLayout>

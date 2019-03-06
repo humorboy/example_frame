@@ -12,6 +12,7 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 includeCompileClasspath = true
+                arguments = [AROUTER_MODULE_NAME :project.getName()]
             }
         }
     }
@@ -59,6 +60,10 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.2.1'
     provided 'org.glassfish:javax.annotation:10.0-b28'
+
+    //Arouter
+    implementation 'com.alibaba:arouter-api:1.4.1'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 
     //other
     implementation 'com.android.support:multidex:1.0.1'

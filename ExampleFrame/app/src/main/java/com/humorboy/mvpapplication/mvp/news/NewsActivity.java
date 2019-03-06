@@ -1,4 +1,4 @@
-package com.humorboy.mvpapplication.test;
+package com.humorboy.mvpapplication.mvp.news;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

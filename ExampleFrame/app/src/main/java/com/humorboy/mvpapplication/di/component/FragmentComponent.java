@@ -4,7 +4,7 @@ import android.app.Activity;
 
 import com.humorboy.mvpapplication.di.module.FragmentModule;
 import com.humorboy.mvpapplication.di.scope.FragmentScope;
-import com.humorboy.mvpapplication.test.fragment.DailyFragment;
+import com.humorboy.mvpapplication.mvp.main.fragment.DailyFragment;
 
 import dagger.Component;
 

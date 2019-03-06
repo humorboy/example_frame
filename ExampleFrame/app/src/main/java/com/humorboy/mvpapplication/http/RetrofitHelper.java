@@ -1,8 +1,9 @@
 package com.humorboy.mvpapplication.http;
 
 import com.humorboy.mvpapplication.http.api.Apis;
-import com.humorboy.mvpapplication.test.model.DailyBeforeListBean;
-import com.humorboy.mvpapplication.test.model.DailyListBean;
+import com.humorboy.mvpapplication.mvp.main.model.DailyBeforeListBean;
+import com.humorboy.mvpapplication.mvp.main.model.DailyListBean;
+import com.humorboy.mvpapplication.mvp.welcome.model.WelcomeBean;
 
 import javax.inject.Inject;
 
@@ -13,6 +14,13 @@ public class RetrofitHelper implements HttpHelper{
     @Inject
     public RetrofitHelper(Apis mApiService) {
         this.mApiService = mApiService;
+    }
+
+
+
+    @Override
+    public Flowable<WelcomeBean> fetchWelcomeInfo(String res) {
+        return mApiService.getWelcomeInfo(res);
     }
 
     @Override
