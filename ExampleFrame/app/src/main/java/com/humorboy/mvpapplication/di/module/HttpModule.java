@@ -2,7 +2,7 @@ package com.humorboy.mvpapplication.di.module;
 
 import com.humorboy.mvpapplication.BuildConfig;
 import com.humorboy.mvpapplication.app.Constants;
-import com.humorboy.mvpapplication.di.qualifier.ZhihuUrl;
+import com.humorboy.mvpapplication.di.qualifier.NewsUrl;
 import com.humorboy.mvpapplication.http.api.Apis;
 import com.humorboy.mvpapplication.util.SystemUtil;
 
@@ -26,7 +26,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by codeest on 2017/2/26.
+ * Created by humorboy on 2019/2/26.
  */
 
 @Module
@@ -47,7 +47,7 @@ public class HttpModule {
 
     @Singleton
     @Provides
-    @ZhihuUrl
+    @NewsUrl
     Retrofit provideZhihuRetrofit(Retrofit.Builder builder, OkHttpClient client) {
         return createRetrofit(builder, client, Apis.HOST);
     }
@@ -117,7 +117,7 @@ public class HttpModule {
 
     @Singleton
     @Provides
-    Apis provideZhihuService(@ZhihuUrl Retrofit retrofit) {
+    Apis provideZhihuService(@NewsUrl Retrofit retrofit) {
         return retrofit.create(Apis.class);
     }
 

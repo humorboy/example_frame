@@ -5,6 +5,7 @@ import com.humorboy.mvpapplication.base.BasePresenter;
 import com.humorboy.mvpapplication.base.BaseView;
 import com.humorboy.mvpapplication.mvp.main.model.DailyBeforeListBean;
 import com.humorboy.mvpapplication.mvp.main.model.DailyListBean;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 /**
  * Created by codeest on 16/8/11.
@@ -13,24 +14,13 @@ import com.humorboy.mvpapplication.mvp.main.model.DailyListBean;
 public interface MainContract {
 
     interface View extends BaseView {
-
-        void showContent(DailyListBean info);
-
-        void showMoreContent(String date, DailyBeforeListBean info);
-
-        void doInterval(int currentCount);
+        void showContent(String info);
     }
 
     interface Presenter extends BasePresenter<View> {
 
-        void getDailyData();
+        void checkVersion(String currentVersion);
 
-        void getBeforeData(String date);
-
-        void startInterval();
-
-        void stopInterval();
-
-        void insertReadToDB(int id);
+        void checkPermissions(RxPermissions rxPermissions);
     }
 }
